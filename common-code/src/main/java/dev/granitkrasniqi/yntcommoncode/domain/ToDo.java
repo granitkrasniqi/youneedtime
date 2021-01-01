@@ -57,4 +57,15 @@ public class ToDo {
     public void setExpectedHours(double expectedHours) {
         this.expectedHours = expectedHours;
     }
+
+    @Override
+    public String toString() {
+        return "ToDo{" +
+                "id='" + id + '\'' +
+                ", text='" + text + '\'' +
+                ", createdAt=" + createdAt +
+                ", status=" + status.getValue() +
+                ", expectedHours=" + expectedHours +
+                '}';
+    }
 }
