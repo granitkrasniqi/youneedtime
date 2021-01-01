@@ -7,6 +7,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>create-todo-lambda</module>
+        <module>common-code</module>
     </modules>
     <groupId>dev.granitkrasniqi</groupId>
     <artifactId>youneedtime</artifactId>
