@@ -11,6 +11,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.granitkrasniqi.yntcommoncode.domain.ToDo;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class CreateToDoLambda {
@@ -21,20 +24,27 @@ public class CreateToDoLambda {
 
     public APIGatewayProxyResponseEvent handler(APIGatewayProxyRequestEvent request) throws IOException {
         final ToDo toDo = objectMapper.readValue(request.getBody(), ToDo.class);
-        Item savedItem = saveToDoItem(toDo);
+        Item savedItem = prepareAndSaveToDoItem(toDo);
+
+        Map<String, String> responseJsonPayload = new HashMap<>();
+        responseJsonPayload.put(ToDo.ID_FIELD, savedItem.getString(ToDo.ID_FIELD));
 
         return new APIGatewayProxyResponseEvent()
                 .withStatusCode(200)
-                .withBody(savedItem.getString(ToDo.ID_FIELD));
+                .withBody(objectMapper.writeValueAsString(responseJsonPayload));
     }
 
-    private Item saveToDoItem(ToDo toDo) {
+    private Item prepareAndSaveToDoItem(final ToDo toDo) {
         final Table table = dynamoDB.getTable(tableName);
 
+        toDo.setId(UUID.randomUUID().toString());
+        Instant now = Instant.now();
+        toDo.setCreatedAt(now);
+
         final Item item = new Item()
-                .withPrimaryKey(ToDo.ID_FIELD, UUID.randomUUID().toString())
+                .withPrimaryKey(ToDo.ID_FIELD, toDo.getId())
                 .withString(ToDo.TEXT_FIELD, toDo.getText())
-                .withLong(ToDo.CREATED_AT_FIELD, toDo.getCreatedAt())
+                .withString(ToDo.CREATED_AT_FIELD, now.toString())
                 .withString(ToDo.STATUS_FIELD, toDo.getStatus().getValue())
                 .withDouble(ToDo.EXPECTED_DONE_HOURS_FIELD, toDo.getExpectedDoneHours());
         table.putItem(item);
