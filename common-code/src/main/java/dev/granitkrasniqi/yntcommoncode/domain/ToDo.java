@@ -1,5 +1,7 @@
 package dev.granitkrasniqi.yntcommoncode.domain;
 
+import java.time.Instant;
+
 public class ToDo {
     public final static String ID_FIELD = "id";
     public final static String TEXT_FIELD = "text";
@@ -9,14 +11,14 @@ public class ToDo {
 
     private String id;
     private String text;
-    private Long createdAt;
+    private Instant createdAt;
     private ToDoStatus status;
     private double expectedDoneHours;
 
     public ToDo() {
     }
 
-    public ToDo(String id, String text, Long createdAt, ToDoStatus status, double expectedDoneHours) {
+    public ToDo(String id, String text, Instant createdAt, ToDoStatus status, double expectedDoneHours) {
         this.id = id;
         this.text = text;
         this.createdAt = createdAt;
@@ -40,11 +42,11 @@ public class ToDo {
         this.text = text;
     }
 
-    public Long getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Long createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
