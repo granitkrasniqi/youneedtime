@@ -1,21 +1,27 @@
 package dev.granitkrasniqi.yntcommoncode.domain;
 
 public class ToDo {
+    public final static String ID_FIELD = "id";
+    public final static String TEXT_FIELD = "text";
+    public final static String CREATED_AT_FIELD = "createdAt";
+    public final static String STATUS_FIELD = "status";
+    public final static String EXPECTED_DONE_HOURS_FIELD = "expectedDoneHours";
+
     private String id;
     private String text;
     private Long createdAt;
     private ToDoStatus status;
-    private double expectedHours;
+    private double expectedDoneHours;
 
     public ToDo() {
     }
 
-    public ToDo(String id, String text, Long createdAt, ToDoStatus status, double expectedHours) {
+    public ToDo(String id, String text, Long createdAt, ToDoStatus status, double expectedDoneHours) {
         this.id = id;
         this.text = text;
         this.createdAt = createdAt;
         this.status = status;
-        this.expectedHours = expectedHours;
+        this.expectedDoneHours = expectedDoneHours;
     }
 
     public String getId() {
@@ -50,12 +56,12 @@ public class ToDo {
         this.status = status;
     }
 
-    public double getExpectedHours() {
-        return expectedHours;
+    public double getExpectedDoneHours() {
+        return expectedDoneHours;
     }
 
-    public void setExpectedHours(double expectedHours) {
-        this.expectedHours = expectedHours;
+    public void setExpectedDoneHours(double expectedDoneHours) {
+        this.expectedDoneHours = expectedDoneHours;
     }
 
     @Override
@@ -65,7 +71,7 @@ public class ToDo {
                 ", text='" + text + '\'' +
                 ", createdAt=" + createdAt +
                 ", status=" + status.getValue() +
-                ", expectedHours=" + expectedHours +
+                ", expectedDoneHours=" + expectedDoneHours +
                 '}';
     }
 }
