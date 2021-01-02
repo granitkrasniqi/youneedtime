@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <modules>
-        <module>create-todo-lambda</module>
         <module>common-code</module>
+        <module>create-todo-lambda</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -49,6 +49,15 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.6.0</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>3.0.0-M3</version>
+                </plugin>
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>3.1.1</version>

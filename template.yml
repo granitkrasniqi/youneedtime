@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: You need time project
+
+Globals:
+  Function:
+    Runtime: java11
+    MemorySize: 512
+    Timeout: 25
+    Environment:
+      Variables:
+        TODO_TABLE: !Ref ToDoTable
+  Api:
+    OpenApiVersion: '3.0.1'
+
+Resources:
+  ToDoTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+
+  CreateToDoLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: create-todo-lambda/target/lambda.zip
+      Handler: dev.granitkrasniqi.createtodo.CreateToDoLambda::handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ToDoTable
+      Events:
+        ApiEvents:
+          Type: Api
+          Properties:
+            Path: /todos
+            Method: POST
+
+
+
+
