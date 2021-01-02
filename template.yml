@@ -36,6 +36,22 @@ Resources:
             Path: /todos
             Method: POST
 
+  GetToDoLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: query-todo-lambda/target/lambda.zip
+      Handler: dev.granitkrasniqi.querytodo.GetToDoLambda::handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref ToDoTable
+      Events:
+        ApiEvents:
+          Type: Api
+          Properties:
+            Path: /todos/{id}
+            Method: GET
+
+
 
 
 

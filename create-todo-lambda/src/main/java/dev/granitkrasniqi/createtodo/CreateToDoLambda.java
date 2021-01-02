@@ -24,7 +24,7 @@ public class CreateToDoLambda {
 
     public APIGatewayProxyResponseEvent handler(APIGatewayProxyRequestEvent request) throws IOException {
         final ToDo toDo = objectMapper.readValue(request.getBody(), ToDo.class);
-        Item savedItem = prepareAndSaveToDoItem(toDo);
+        final Item savedItem = prepareAndSaveToDoItem(toDo);
 
         Map<String, String> responseJsonPayload = new HashMap<>();
         responseJsonPayload.put(ToDo.ID_FIELD, savedItem.getString(ToDo.ID_FIELD));
