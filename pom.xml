@@ -7,6 +7,7 @@
     <modules>
         <module>common-code</module>
         <module>create-todo-lambda</module>
+        <module>query-todo-lambda</module>
     </modules>
 
     <packaging>pom</packaging>
