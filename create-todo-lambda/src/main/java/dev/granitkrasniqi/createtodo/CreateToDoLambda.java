@@ -37,17 +37,24 @@ public class CreateToDoLambda {
     private Item prepareAndSaveToDoItem(final ToDo toDo) {
         final Table table = dynamoDB.getTable(tableName);
 
-        toDo.setId(UUID.randomUUID().toString());
+        ToDo toDoWithId = establishId(toDo);
         Instant now = Instant.now();
-        toDo.setCreatedAt(now);
+        toDoWithId.setCreatedAt(now);
 
         final Item item = new Item()
-                .withPrimaryKey(ToDo.ID_FIELD, toDo.getId())
-                .withString(ToDo.TEXT_FIELD, toDo.getText())
-                .withString(ToDo.CREATED_AT_FIELD, now.toString())
-                .withString(ToDo.STATUS_FIELD, toDo.getStatus().getValue())
-                .withDouble(ToDo.EXPECTED_DONE_HOURS_FIELD, toDo.getExpectedDoneHours());
+                .withPrimaryKey(ToDo.ID_FIELD, toDoWithId.getId())
+                .withString(ToDo.TEXT_FIELD, toDoWithId.getText())
+                .withString(ToDo.CREATED_AT_FIELD, toDoWithId.toString())
+                .withString(ToDo.STATUS_FIELD, toDoWithId.getStatus().getValue())
+                .withDouble(ToDo.EXPECTED_DONE_HOURS_FIELD, toDoWithId.getExpectedDoneHours());
         table.putItem(item);
         return item;
+    }
+
+    private ToDo establishId(ToDo toDo) {
+        if (toDo.getId() == null || toDo.getId().isEmpty()) {
+            toDo.setId(UUID.randomUUID().toString());
+        }
+        return toDo;
     }
 }
