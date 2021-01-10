@@ -56,7 +56,7 @@ Resources:
       CodeUri: delete-todo-lambda/target/lambda.zip
       Handler: dev.granitkrasniqi.deletetodo.DeleteToDoLambda::handler
       Policies:
-        - DynamoDBReadPolicy:
+        - DynamoDBCrudPolicy:
             TableName: !Ref ToDoTable
       Events:
         ApiEvents:
