@@ -36,4 +36,16 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>reproducible-build-maven-plugin</artifactId>
+                <groupId>io.github.zlika</groupId>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
