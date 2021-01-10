@@ -50,6 +50,20 @@ Resources:
           Properties:
             Path: /todos/{id}
             Method: GET
+  DeleteToDoLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: delete-todo-lambda/target/lambda.zip
+      Handler: dev.granitkrasniqi.deletetodo.DeleteToDoLambda::handler
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref ToDoTable
+      Events:
+        ApiEvents:
+          Type: Api
+          Properties:
+            Path: /todos/{id}
+            Method: DELETE
 
 
 
