@@ -5,7 +5,7 @@ public enum ToDoStatus {
     IN_PROGRESS("InProgress"),
     DONE("Done");
 
-    private String value;
+    private final String value;
 
     ToDoStatus(String value) {
         this.value = value;

@@ -9,6 +9,7 @@
         <module name="common-code" />
         <module name="create-todo-lambda" />
         <module name="query-todo-lambda" />
+        <module name="delete-todo-lambda" />
       </profile>
     </annotationProcessing>
   </component>

@@ -30,7 +30,7 @@ public class CreateToDoLambda {
         responseJsonPayload.put(ToDo.ID_FIELD, savedItem.getString(ToDo.ID_FIELD));
 
         return new APIGatewayProxyResponseEvent()
-                .withStatusCode(200)
+                .withStatusCode(201)
                 .withBody(objectMapper.writeValueAsString(responseJsonPayload));
     }
 
